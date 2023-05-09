@@ -1,24 +1,21 @@
-import logo from './logo.svg';
+
+import Map from './components/Map/Map';
+import ThemeContext from './contexts/themeContext';
 import './App.css';
+import { useState } from 'react';
 
 function App() {
+
+
+  const [token,setToken] = useState(null);
+
+  const getters = {token};
+  const setters = {setToken};
+  const APIURL = "http://localhost:3000/api";
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeContext.Provider value={{...getters, ...setters, APIURL}}>
+      <Map />
+    </ThemeContext.Provider>
   );
 }
 
