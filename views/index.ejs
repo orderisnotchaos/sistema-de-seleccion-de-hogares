@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <title><%= title %></title>
+</head>
+
+<body>
+    
+    <%- include('./partials/header.ejs')-%>
+    <div class="index-container">
+
+        <h1 class="index-h1">¡Bienvenida Marga!</h1>
+
+        <% if(matches.perfectMatches.length === 0 && matches.partialMatches.length === 0){ %>
+
+            <h2 class="index-h2">No hay nuevas coincidencias</h2>
+
+        <% } %>
+        <% for(let i = 0; i<matches.perfectMatches.length;i++){ %>
+            <div class="perfect-match-container">
+                <h2 class="perfect-match-h2"><%= matches.perfectMatches[i].property.direction %> & <%= matches.perfectMatches[i].client.name%></h2>
+                <div class="match-details-container">
+                    <p class="match-details-p">valor de venta: <%= matches.perfectMatches[i].property.valueSell %></p>
+                    <p class="match-details-p">valor de renta: <%= matches.perfectMatches[i].property.valueRent %></p>
+                </div>
+                <div class="match-characteristics-container">
+                    <% if(matches.perfectMatches[i].property.characteristics !== undefined) {%>
+                        <% matches.perfectMatches[i].property.characteristics.forEach(characteristic => { %>
+                            <p class="match-characteristic-p"><%= characteristic.characteristic %></p>
+                        <% }) %>
+                    <% } %>
+                </div>
+            </div>
+
+        <% } %>
+
+        <% for(let i = 0; i<matches.partialMatches.length;i++){ %>
+            <div class="partial-match-container">
+                <h2 class="partial-match-h2"><%= matches.partialMatches[i].property.direction %> & <%=matches.partialMatches[i].client.name%></h2>
+                <div class="match-details-container">
+                    <p class="match-details-p">valor de venta: <%= matches.partialMatches[i].property.valueSell %></p>
+                    <p class="match-details-p">valor de renta: <%= matches.partialMatches[i].property.valueRent %></p>
+                </div>
+                <div class="match-characteristics-container">
+                    <% if(matches.partialMatches[i].property.characteristics !== undefined) {%>
+                        <% matches.partialMatches[i].property.characteristics.forEach(characteristic => { %>
+                            <p class="match-characteristic-p"><%= characteristic.characteristic %></p>
+                        <% }) %>
+                    <% } %>
+                </div>
+            </div>
+
+        <% } %>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/properties.css">
+    <title><%= title %></title>
+</head>
+<body>
+    <%- include('./partials/header.ejs')-%>
+    <div class="inmuebles-container">
+        <h1 class="inmuebles-h1">Inmuebles</h1>
+        <div class="add-property-container">
+            <form class="add-property-form" action="/properties/add" method="POST">
+                <h2 class="add-property-h2">Agregar Inmueble</h2>
+                <input class="add-property-input" type="text" name="direction" placeholder="dirección">
+                <input class="add-property-input" type="text" name="valueRent" placeholder="valor de la renta">
+                <input class="add-property-input" type="text" name="valueSale" placeholder="valor de la venta">
+                
+                <select id="property-type" class="property-type-demand" name="propertyType">
+                    <option value="casa">Casa</option>
+                    <option value="departamento">Departamento</option>
+                    <option value="terreno">Terreno</option>
+                    <option value="local">Local</option>
+                    <option value="galpon">Galpón</option>
+                    <option value="campo">Campo</option>
+                    <option value="quinta">Quinta</option>
+                    <option value="oficina">Oficina</option>
+                    <option value="cochera">Cochera</option>
+                    <option value="deposito">Depósito</option>
+                    <option value="hotel">Hotel</option>
+                    <option value="edificio">Edificio</option>
+                    <option value="industrial">Industrial</option>
+                    <option value="comercial">Comercial</option>
+                    <option value="rural">Rural</option>
+                    <option value="lote">Lote</option>
+                    <option value="isla">Isla</option>
+                    <option value="fraccion">Fracción</option>
+                    <option value="ph">PH</option>
+                    <option value="duplex">Duplex</option>
+                    <option value="triplex">Triplex</option>
+                    <option value="chalet">Chalet</option>
+                    <option value="cabaña">Cabaña</option>
+                    <option value="country">Country</option>
+                    <option value="quinta">Quinta</option>
+                    <option value="chacra">Chacra</option>
+                    <option value="bodega">Bodega</option>
+                    <option value="viñedo">Viñedo</option>
+                    <option value="estancia">Estancia</option>
+                    <option value="hostel">Hostel</option>
+                    <option value="camping">Camping</option>
+                    <option value="fondo de comercio">Fondo de comercio</option>
+                    <option value="emprendimiento">Emprendimiento</option>
+                    <option value="otros">Otros</option>
+                </select>
+
+                <select id="operation-type" class="property-type-demand" name="operationType">
+                    <option value="alquiler">Alquiler</option>
+                    <option value="venta">Venta</option>
+                    <option value="alquiler temporal">Alquiler Temporal</option>
+                    <option value="permuta">Permuta</option>
+                    <option value="emprendimiento">Emprendimiento</option>
+                    <option value="otros">Otros</option>
+                </select>
+
+                
+                <div id="characteristics-inputs">
+                </div>
+                <div class="submit-button-container">
+                    <button type="submit">agregar</button>
+                </div>
+            </form>
+        </div>
+        <ul class="properties-ul">
+            <% properties.forEach((property,i) => { %>
+                <%- include('./partials/property.ejs', {property: property, key: i})-%>
+            <% }) %>
+        </ul>
+    </div>
+    <script src="/js/properties.js"></script>
+    <script src="/js/editProperty.js"></script>
+</body>
+</html>

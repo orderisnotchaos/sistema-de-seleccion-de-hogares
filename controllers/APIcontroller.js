@@ -1,5 +1,5 @@
 
-const db = require('../database/models.js');
+const db = require('../database/models');
 
 
 module.exports = {
@@ -7,6 +7,6 @@ module.exports = {
 
         let houses = await db.Houses.findAll();
 
-        return res.status(200).json({houses});
+        return res.status(200).json(houses);
     }
 }

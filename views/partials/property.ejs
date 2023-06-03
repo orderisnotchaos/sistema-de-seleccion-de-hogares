@@ -1,0 +1,70 @@
+<li id= "property-li-<%=key%>"class="property-li">
+    <div id = "default-view-<%=key%>"class="default-view">
+        <div class="property-card">
+            <h2 class="property-name"><p class="property-direction-p"><%= property.direction %></p><div id="delete-property-button-<%=key%>-<%=property.id%>" class="delete-property-button">X</div></h2>
+            <div class="property-details-container">
+                <h4 class="property-details-h4">Valores</h4>
+                <p class="property-details-p">valor de venta:<%= property.valueSell%></p>
+                <p class="property-details-p">valor de renta:<%= property.valueRent%></p>
+            </div>
+            <div class="property-characteristics-container">
+                <h4 class="property-details-h4">características</h4>
+                <% if(property.characteristics !== undefined) {%>
+                    <p class="property-characteristic-p">tipo de inmueble: <%= property.characteristics[0].propertyType %></p>
+                    <p class="property-characteristic-p">cantidad de cuartos: <%= property.characteristics[0].roomsQuantity %></p>
+                    <p class="property-characteristic-p">cantidad de baños: <%= property.characteristics[0].bathroomsQuantity %></p>
+                    <p class="property-characteristic-p">cantidad de cocheras: <%= property.characteristics[0].cocherasQuantity %></p>
+                    <p class="property-characteristic-p">cantidad de pisos: <%= property.characteristics[0].floorsQuantity %></p>
+                    <p class="property-characteristic-p">metros cuadrados cubiertos: <%= property.characteristics[0].sqmc %></p>
+                    <p class="property-characteristic-p">total metros cuadrados: <%= property.characteristics[0].sqmt %></p>
+                    <p class="property-characteristic-p">antigüedad: <%= property.characteristics[0].antiquity %></p>
+                    <p class="property-characteristic-p">descripción: <%= property.characteristics[0].description %></p>
+                    <p class="property-characteristic-p">dirección: <%= property.characteristics[0].address %></p>
+                    <p class="property-characteristic-p">ciudad: <%= property.characteristics[0].city %></p>
+                    <p class="property-characteristic-p">municipio: <%= property.characteristics[0].neighborhood %></p>
+                    <p class="property-characteristic-p">provincia: <%= property.characteristics[0].province %></p>
+                    <p class="property-characteristic-p">tipo de moneda: <%= property.characteristics[0].currency %></p>
+                    <p class="property-characteristic-p">tipo de operación: <%= property.characteristics[0].operationType %></p>
+                <% } %>
+            </div>
+            <div class="edit-view-button-container">
+                <button class="edit-view-button" id="edit-view-button-<%=key%>">editar</button>
+            </div>
+        </div>
+
+    </div>
+    <div id = "edit-view-<%=key%>" class="edit-view">
+        <div class="property-card">
+            <form id = "<%=key%>"action = "/properties/<%= property.id%>/edit" method="POST" class="edit-property-form">
+                <h2 class="property-name"><p class="property-direction-p"><%= property.direction %></p><div id="delete-property-button-<%=key%>-<%=property.id%>" class="delete-property-button">X</div></h2>
+                <div class="property-details-container">
+                    <input class="property-details-input" type="text" name="valueSell" value="<%= property.valueSell%>">
+                    <input class="property-details-input" type="text" name="valueRent" value="<%= property.valueRent%>">
+                </div>
+                <div id = "characteristics-container-<%=key%>" class="property-characteristics-container">
+                    <h4 class="property-details-h4">características</h4>
+                    <% if(property.characteristics !== undefined) {%>
+                        <p class="property-characteristic-p">tipo de inmueble: <%= property.characteristics[0].propertyType %></p>
+                        <p class="property-characteristic-p">cantidad de cuartos: <%= property.characteristics[0].roomsQuantity %></p>
+                        <p class="property-characteristic-p">cantidad de baños: <%= property.characteristics[0].bathroomsQuantity %></p>
+                        <p class="property-characteristic-p">cantidad de cocheras: <%= property.characteristics[0].cocherasQuantity %></p>
+                        <p class="property-characteristic-p">cantidad de pisos: <%= property.characteristics[0].floorsQuantity %></p>
+                        <p class="property-characteristic-p">metros cuadrados cubiertos: <%= property.characteristics[0].sqmc %></p>
+                        <p class="property-characteristic-p">total metros cuadrados: <%= property.characteristics[0].sqmt %></p>
+                        <p class="property-characteristic-p">antigüedad: <%= property.characteristics[0].antiquity %></p>
+                        <p class="property-characteristic-p">descripción: <%= property.characteristics[0].description %></p>
+                        <p class="property-characteristic-p">dirección: <%= property.characteristics[0].address %></p>
+                        <p class="property-characteristic-p">ciudad: <%= property.characteristics[0].city %></p>
+                        <p class="property-characteristic-p">municipio: <%= property.characteristics[0].neighborhood %></p>
+                        <p class="property-characteristic-p">provincia: <%= property.characteristics[0].province %></p>
+                        <p class="property-characteristic-p">tipo de moneda: <%= property.characteristics[0].currency %></p>
+                        <p class="property-characteristic-p">tipo de operación: <%= property.characteristics[0].operationType %></p>
+                    <% } %>
+                </div>
+                <div class="edit-view-button-container">
+                    <button class="edit-view-button" id="edit-view-button-<%=key%>">editar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</li>

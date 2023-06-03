@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/matches.css">
+    <title>Document</title>
+</head>
+<body>
+    <%- include('./partials/header.ejs')-%>
+
+    <div class="matches-container">
+        <% if(matches.perfectMatches.length === 0 && matches.partialMatches.length === 0){ %>
+
+            <h2 class="matches-h2">No hay coincidencias</h2>
+
+        <% } %>
+        <% for(let i = 0; i<matches.perfectMatches.length;i++){ %>
+            <div class="perfect-match-container">
+                <h2 class="perfect-match-h2"><%= matches.perfectMatches[i].property.direction %> & <%=matches.perfectMatches[i].client.name%></h2>
+                <div class="match-details-container">
+                    <h4 class="matches-h4">valores del inmueble</h4>
+                    <p class="match-details-p">valor de venta: <%= matches.perfectMatches[i].property.valueSell %></p>
+                    <p class="match-details-p">valor de renta: <%= matches.perfectMatches[i].property.valueRent %></p>
+                    <h4 class="matches-h4">contacto del cliente:</h4>
+                    <p class="match-details-p">tel: <%=matches.perfectMatches[i].client.phone %></p>
+                    <p class="match-details-p">mail: <%=matches.perfectMatches[i].client.email %></p>
+                </div>
+                <div class="match-characteristics-container">
+                    <h4 class="matches-h4">caracteristicas</h4>
+                    <% if(matches.partialMatches[i].property.characteristics !== undefined ) {%>
+
+                        <h4 class="matches-h4">caracteristicas del inmueble</h4>
+                        <p class="property-characteristic-p">tipo de inmueble: <%= matches.partialMatches[i].property.characteristics[0].propertyType %></p>
+                        <p class="property-characteristic-p">cantidad de cuartos: <%= matches.partialMatches[i].property.characteristics[0].roomsQuantity %></p>
+                        <p class="property-characteristic-p">cantidad de baños: <%= matches.partialMatches[i].property.characteristics[0].bathroomsQuantity %></p>
+                        <p class="property-characteristic-p">cantidad de cocheras: <%= matches.partialMatches[i].property.characteristics[0].cocherasQuantity %></p>
+                        <p class="property-characteristic-p">cantidad de pisos: <%= matches.partialMatches[i].property.characteristics[0].floorsQuantity %></p>
+                        <p class="property-characteristic-p">metros cuadrados cubiertos: <%= matches.partialMatches[i].property.characteristics[0].sqmc %></p>
+                        <p class="property-characteristic-p">total metros cuadrados: <%= matches.partialMatches[i].property.characteristics[0].sqmt %></p>
+                        <p class="property-characteristic-p">antigüedad: <%= matches.partialMatches[i].property.characteristics[0].antiquity %></p>
+                        <p class="property-characteristic-p">descripción: <%= matches.partialMatches[i].property.characteristics[0].description %></p>
+                        <p class="property-characteristic-p">dirección: <%= matches.partialMatches[i].property.characteristics[0].address %></p>
+                        <p class="property-characteristic-p">ciudad: <%= matches.partialMatches[i].property.characteristics[0].city %></p>
+                        <p class="property-characteristic-p">municipio: <%= matches.partialMatches[i].property.characteristics[0].neighborhood %></p>
+                        <p class="property-characteristic-p">provincia: <%= matches.partialMatches[i].property.characteristics[0].province %></p>
+                        <p class="property-characteristic-p">tipo de moneda: <%= matches.partialMatches[i].property.characteristics[0].currency %></p>
+                        <p class="property-characteristic-p">tipo de operación: <%= matches.partialMatches[i].property.characteristics[0].operationType %></p>
+                    <% } %>
+                </div>
+            </div>
+
+        <% } %>
+
+        <% for(let i = 0; i<matches.partialMatches.length;i++){ %>
+            <div class="partial-match-container">
+                <h2 class="partial-match-h2"><%= matches.partialMatches[i].property.direction %> & <%= matches.partialMatches[i].client.name%></h2>
+                <div class="match-details-container">
+                    <h4 class="matches-h4">valores del inmueble</h4>
+                    <p class="match-details-p">valor de venta: <%= matches.partialMatches[i].property.valueSell %></p>
+                    <p class="match-details-p">valor de renta: <%= matches.partialMatches[i].property.valueRent %></p>
+                    <h4 class="matches-h4">contacto del cliente:</h4>
+                    <p class="match-details-p">tel: <%=matches.partialMatches[i].client.phone %></p>
+                    <p class="match-details-p">mail: <%=matches.partialMatches[i].client.email %></p>
+                </div>
+                <div class="match-characteristics-container">
+                    <h4 class="matches-h4">caracteristicas</h4>
+                    <% if(matches.partialMatches[i].property.characteristics !== undefined && matches.partialMatches[i].client.demands !== undefined) {%>
+
+                        <h4 class="matches-h4">caracteristicas del inmueble</h4>
+                        <p class="property-characteristic-p">tipo de inmueble: <%= matches.partialMatches[i].property.characteristics[0].propertyType %></p>
+                        <p class="property-characteristic-p">cantidad de cuartos: <%= matches.partialMatches[i].property.characteristics[0].roomsQuantity %></p>
+                        <p class="property-characteristic-p">cantidad de baños: <%= matches.partialMatches[i].property.characteristics[0].bathroomsQuantity %></p>
+                        <p class="property-characteristic-p">cantidad de cocheras: <%= matches.partialMatches[i].property.characteristics[0].cocherasQuantity %></p>
+                        <p class="property-characteristic-p">cantidad de pisos: <%= matches.partialMatches[i].property.characteristics[0].floorsQuantity %></p>
+                        <p class="property-characteristic-p">metros cuadrados cubiertos: <%= matches.partialMatches[i].property.characteristics[0].sqmc %></p>
+                        <p class="property-characteristic-p">total metros cuadrados: <%= matches.partialMatches[i].property.characteristics[0].sqmt %></p>
+                        <p class="property-characteristic-p">antigüedad: <%= matches.partialMatches[i].property.characteristics[0].antiquity %></p>
+                        <p class="property-characteristic-p">descripción: <%= matches.partialMatches[i].property.characteristics[0].description %></p>
+                        <p class="property-characteristic-p">dirección: <%= matches.partialMatches[i].property.characteristics[0].address %></p>
+                        <p class="property-characteristic-p">ciudad: <%= matches.partialMatches[i].property.characteristics[0].city %></p>
+                        <p class="property-characteristic-p">municipio: <%= matches.partialMatches[i].property.characteristics[0].neighborhood %></p>
+                        <p class="property-characteristic-p">provincia: <%= matches.partialMatches[i].property.characteristics[0].province %></p>
+                        <p class="property-characteristic-p">tipo de moneda: <%= matches.partialMatches[i].property.characteristics[0].currency %></p>
+                        <p class="property-characteristic-p">tipo de operación: <%= matches.partialMatches[i].property.characteristics[0].operationType %></p>
+
+                        <h4 class="matches-h4">demandas del cliente</h4>
+                        <p class="client-demand-p">tipo de propiedad: <%= matches.partialMatches[i].client.demands[0].propertyType %></p>
+                        <p class="client-demand-p">cantidad de cuartos: <%= matches.partialMatches[i].client.demands[0].roomsQuantity %></p>
+                        <p class="client-demand-p">cantidad de baños: <%= matches.partialMatches[i].client.demands[0].bathroomsQuantity %></p>
+                        <p class="client-demand-p">cantidad de cocheras: <%= matches.partialMatches[i].client.demands[0].cocherasQuantity %></p>
+                        <p class="client-demand-p">cantidad de pisos: <%= matches.partialMatches[i].client.demands[0].floorsQuantity %></p>
+                        <p class="client-demand-p">metros cubiertos: <%= matches.partialMatches[i].client.demands[0].sqmc %></p>
+                        <p class="client-demand-p">total metros: <%= matches.partialMatches[i].client.demands[0].sqmt %></p>
+                        <p class="client-demand-p">antigüedad: <%= matches.partialMatches[i].client.demands[0].antiquity %></p>
+                        <p class="client-demand-p">localidad: <%= matches.partialMatches[i].client.demands[0].state %></p>
+                    <% } %>
+                </div>
+            </div>
+        <% } %>
+    </div>
+</body>
+</html>

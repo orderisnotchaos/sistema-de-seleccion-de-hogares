@@ -4,3 +4,7 @@ const APIController = require("../controllers/APIcontroller");
 
 
 router.get("/properties", APIController.all);
+
+
+
+module.exports = router;

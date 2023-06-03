@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
 
-    let alias = 'Houses';
+    let alias = 'Property';
     let cols = {
         id: {
             type: DataTypes.INTEGER,
@@ -9,14 +9,6 @@ module.exports = (sequelize, DataTypes) => {
         },
         direction: {
             type:DataTypes.STRING,
-            allowNull: false
-        },
-        squareMeters:{
-            type:DataTypes.FLOAT,
-            allowNull: false
-        },
-        ambients:{
-            type:DataTypes.INTEGER,
             allowNull: false
         },
         valueRent:{
@@ -37,24 +29,20 @@ module.exports = (sequelize, DataTypes) => {
         },
     }
     let config = {
-        tableName: 'houses',
+        tableName: 'property',
         timestamps: true,
     };
 
-    let Houses = sequelize.define(alias, cols, config);
+    let Property = sequelize.define(alias, cols, config);
 
-    Houses.associate = (models) =>{
+    Property.associate = (models) =>{
 
-        Houses.belongsToMany(models.Characteristic, {
-            
+        Property.hasMany(models.Characteristic, {
             as: 'characteristics',
-            through: 'house_characteristics',
-            foreignKey: 'houseId',
-            otherKey: 'characteristic',
-            timestamps: false
+            foreignKey: 'propertyId',
         });
 
     };
 
-    return Houses;
+    return Property;
     };

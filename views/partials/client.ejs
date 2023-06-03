@@ -1,0 +1,67 @@
+<li id = "client-li-<%=key%>" key = "<%= key %>">
+    <div class="client-card">
+        <h2 class="client-name"><p class="client-name-p"><%= client.name %></p><div id= "delete-client-button-<%=key%>-<%=client.id%>"class="delete-client-button">X</div></h2>
+        <div id = "default-view-<%=key%>"class="default-view">
+            <div class="client-data-container">
+                <h4 class="client-h4">datos</h4>
+                <p class="client-data-p">email:<%= client.email %></p>
+                <p class="client-data-p">teléfono:<%= client.phone %></p>
+                <p class="client-data-p">dirección:<%= client.direction %></p>
+                <p class="client-data-p">localidad:<%= client.city %></p>
+            </div>
+            <div class="client-demands-container">
+                <h4 class="client-h4">demandas</h4>
+                <% if(client.demands !== undefined) { %>
+                    <p class="client-demand-p"><%= client.demands[0].propertyType %></p>
+                    <p class="client-demand-p"><%= client.demands[0].roomsQuantity %></p>
+                    <p class="client-demand-p"><%= client.demands[0].bathroomsQuantity %></p>
+                    <p class="client-demand-p"><%= client.demands[0].cocherasQuantity %></p>
+                    <p class="client-demand-p"><%= client.demands[0].floorsQuantity %></p>
+                    <p class="client-demand-p"><%= client.demands[0].sqmc %></p>
+                    <p class="client-demand-p"><%= client.demands[0].sqmt %></p>
+                    <p class="client-demand-p"><%= client.demands[0].antiquity %></p>
+                    <p class="client-demand-p"><%= client.demands[0].state %></p>
+                <% } %>
+            </div>
+            <div class="edit-client-button-container">
+                <button id="edit-client-button-<%=key%>" class="edit-client-button">editar</button>
+            </div>
+        </div>
+        <div id ="edit-view-<%=key%>" class="edit-view">
+            <form id = "edit-client-form-<%=key%>" action="/clients/edit/<%=client.id%>" method="POST" class="edit-client-form">
+                <div class="client-data-container">
+                    <h4 class="client-h4">datos</h4>
+                    <input class="client-data-input" name = "email" value = "<%= client.email %>"></input>
+                    <input class="client-data-input" name = "phone" value = "<%= client.phone %>"></input>
+                    <input class="client-data-input" name = "direction" value = "<%= client.direction %>"></input>
+                    <input class="client-data-input" name = "city" value = "<%= client.city %>"></input>
+                </div>
+                <div class="client-demands-container">
+                    <h4 class="client-h4">demandas</h4>
+                    <% if(client.demands !== undefined) { %>
+                                
+                        <p class="client-demand-p"><%= client.demands.propertyType %></p>
+                        <p class="client-demand-p"><%= client.demands.roomsQuantity %></p>
+                        <p class="client-demand-p"><%= client.demands.bathroomsQuantity %></p>
+                        <p class="client-demand-p"><%= client.demands.cocherasQuantity %></p>
+                        <p class="client-demand-p"><%= client.demands.floorsQuantity %></p>
+                        <p class="client-demand-p"><%= client.demands.sqmc %></p>
+                        <p class="client-demand-p"><%= client.demands.sqmt %></p>
+                        <p class="client-demand-p"><%= client.demands.antiquity %></p>
+                        <p class="client-demand-p"><%= client.demands.state %></p>
+                        <p class="hidden-p"><%=client.id%></p> <!-- ¡no hacer!-->
+
+                    <% } %>
+                    <input class="add-client-input" type="number" name="demandsQuantity" id="demands-quantity-edit" placeholder="cantidad de demandas" value="0">
+
+                    <div id="demands-inputs-edit-<%=key%>">
+                    </div>
+                </div>
+                <div class="edit-client-button-container-edit">
+                    <button type = "submit" id="edit-client-button-submit-<%=key%>" class="edit-client-button">confirmar</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</li>

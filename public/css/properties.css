@@ -1,0 +1,163 @@
+.inmuebles-container{
+    position: absolute;
+    top: 2.6rem;
+    left: 0;
+    width: 100%;
+}
+
+.inmuebles-h1{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+
+}
+
+.add-property-form{
+    width: 30%;
+    border: 1px solid black;
+    margin-left: 5rem;
+}
+
+.add-property-h2{
+    width: 100%;
+    margin: 0;
+    background: linear-gradient(0deg, rgb(255, 0, 0) 0%, rgb(121, 0, 0) 100%);
+
+}
+
+.submit-button-container{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.add-property-input{
+    display: block;
+    width: 80%;
+}
+
+.properties-ul{
+    list-style-type: none;
+    width: 100%;
+    padding-left: 12.5%;
+}
+
+.property-name{
+    margin: 0;
+    width: 100%;
+    height: 1.6rem;
+    display: flex;
+    justify-content: flex-start;
+    background: linear-gradient(0deg, rgb(24, 133, 57) 0%, rgb(76, 194, 121) 100%);
+}
+
+.property-li{
+    width: 100%;
+}
+.property-card{
+
+    display: flex;
+    flex-wrap: wrap;
+    border: 1px solid black;
+    width: 100%;
+
+}
+.property-details-container{
+    display: flex;
+    flex-wrap:wrap;
+    width: 50%;
+}
+
+.property-details-h4{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.property-characteristic-p{
+    display: inline-block;
+    width: 80%;
+    margin: 0;
+    margin-top: 3px;
+    margin-bottom:2px;
+    padding: 0;
+}
+.property-details-p{
+    display: block;
+    width: 100%;
+}
+
+.edit-view{
+    display: none;
+    width: 30%;
+}
+.default-view{
+    width: 30%;
+}
+
+.edit-view-button-container{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.property-characteristics-container{
+    display: flex;
+    flex-wrap: wrap;
+    width: 50%;
+}
+.characteristic-delete-button{
+    width: 20%;
+    height: 1rem;
+    display: flex;
+    background: red;
+
+}
+
+.edit-view-button-container{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.hidden-p{
+    display: none;
+}
+
+.property-characteristic-li{
+
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.edit-property-form{
+    width: 100%;
+}
+
+.property-direction-p{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+    width: 90%;
+}
+
+.demands-input{
+    width: 40%;
+}
+
+.demands-label{
+    width: 50%;
+}
+
+.delete-property-button:hover{
+    cursor: pointer;
+}
+
+.characteristic-delete-button:hover{
+    cursor: pointer;
+}

@@ -1,0 +1,49 @@
+.perfect-match-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    margin: 10px;
+    border: 1px solid black;
+}
+
+.partial-match-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 80%;
+    margin: 10px;
+    border: 1px solid black;
+}
+
+.index-container{
+    position: absolute;
+    display: flex;
+    flex-wrap:wrap;
+    justify-content: center;
+    width: 100%;
+    top: 2.6rem;
+    left: 0;
+}
+
+.index-h1{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.partial-match-h2{
+    background: rgb(250, 187, 71);
+    margin: 0;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.perfect-match-h2{
+    background: rgb(30, 187, 10);
+    margin: 0;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}

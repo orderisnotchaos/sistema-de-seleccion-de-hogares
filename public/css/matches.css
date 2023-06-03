@@ -1,0 +1,104 @@
+.perfect-match-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 80%;
+    margin: 10px;
+    border: 1px solid black;
+}
+
+.partial-match-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 80%;
+    margin: 10px;
+    border: 1px solid black;
+}
+
+.matches-container{
+    position: absolute;
+    display: flex;
+    flex-wrap:wrap;
+    justify-content: center;
+    width: 100%;
+    top: 2.6rem;
+    left: 0;
+}
+
+.match-details-container{
+    width: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.match-characteristics-container{
+    width: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.matches-h1{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.partial-match-h2{
+    background: rgb(250, 187, 71);
+    margin: 0;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.perfect-match-h2{
+    background: rgb(30, 187, 10);
+    margin: 0;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.matches-h4{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin: 0;
+}
+
+.match-details-p{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin: 0;
+}
+
+.property-characteristic-p{
+    display: flex;
+    width: 100%;
+    margin: 0;
+    margin-top: 3px;
+    margin-bottom: 2px;
+    justify-content: center;
+}
+
+.client-demand-p{
+    display: flex;
+    width: 100%;
+    margin: 0;
+    margin-top: 3px;
+    margin-bottom: 2px;
+    justify-content: center;
+}
+
+.match-characteristic-p{
+    display: flex;
+    width: 100%;
+    margin: 0;
+    margin-top: 3px;
+    margin-bottom: 2px;
+    justify-content: center;
+}
