@@ -24,6 +24,10 @@ module.exports = (sequelize, DataTypes) => {
         city:{
             type:DataTypes.STRING,
         },
+        searchingFor:{
+            type:DataTypes.STRING,
+            allowNull: false
+        }
     };
 
     let config = {

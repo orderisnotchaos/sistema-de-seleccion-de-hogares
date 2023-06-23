@@ -6,10 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/header.css">
     <link rel="stylesheet" href="/css/clients.css">
+    <link rel="stylesheet" href="/css/popup.css">
+    <link rel="stylesheet" href="/css/popups.css">
     <title><%= title %></title>
 </head>
 <body>
     <%- include('./partials/header.ejs')-%>
+    <div class="popups-container">
+        <ul class="popups-ul">
+            <% for(let i = 0; i < matches.length; i++){ %>
+
+                <li class="popup-li">
+                    <%- include('./partials/popup.ejs',{match:matches[i],key:i}) -%>
+                </li>
+
+            <% } %>
+        </ul>
+
+
+    </div>
     <div class="clients-container">
         <h1 class="clients-h1">Clientes</h1>
 

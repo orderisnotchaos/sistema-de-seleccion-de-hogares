@@ -1,0 +1,17 @@
+.popups-container{
+    position: absolute;
+    width: 25vw;
+    min-height:1.6rem;
+    left: 75vw;
+    top: 2.6rem;
+}
+
+.popups-ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.popup-li{
+    margin-top: 10px;
+}

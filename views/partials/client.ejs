@@ -12,15 +12,9 @@
             <div class="client-demands-container">
                 <h4 class="client-h4">demandas</h4>
                 <% if(client.demands !== undefined) { %>
-                    <p class="client-demand-p"><%= client.demands[0].propertyType %></p>
-                    <p class="client-demand-p"><%= client.demands[0].roomsQuantity %></p>
-                    <p class="client-demand-p"><%= client.demands[0].bathroomsQuantity %></p>
-                    <p class="client-demand-p"><%= client.demands[0].cocherasQuantity %></p>
-                    <p class="client-demand-p"><%= client.demands[0].floorsQuantity %></p>
-                    <p class="client-demand-p"><%= client.demands[0].sqmc %></p>
-                    <p class="client-demand-p"><%= client.demands[0].sqmt %></p>
-                    <p class="client-demand-p"><%= client.demands[0].antiquity %></p>
-                    <p class="client-demand-p"><%= client.demands[0].state %></p>
+                    <% for(let i = 0; i<client.demands.length; i++){%>
+                        <p class="client-demand-p"><%= client.demands[i].demandName %>: <%= client.demands[i].demand %></p>
+                    <% } %>
                 <% } %>
             </div>
             <div class="edit-client-button-container">
@@ -40,15 +34,9 @@
                     <h4 class="client-h4">demandas</h4>
                     <% if(client.demands !== undefined) { %>
                                 
-                        <p class="client-demand-p"><%= client.demands.propertyType %></p>
-                        <p class="client-demand-p"><%= client.demands.roomsQuantity %></p>
-                        <p class="client-demand-p"><%= client.demands.bathroomsQuantity %></p>
-                        <p class="client-demand-p"><%= client.demands.cocherasQuantity %></p>
-                        <p class="client-demand-p"><%= client.demands.floorsQuantity %></p>
-                        <p class="client-demand-p"><%= client.demands.sqmc %></p>
-                        <p class="client-demand-p"><%= client.demands.sqmt %></p>
-                        <p class="client-demand-p"><%= client.demands.antiquity %></p>
-                        <p class="client-demand-p"><%= client.demands.state %></p>
+                        <% for(let i = 0; i<client.demands.length; i++){%>
+                            <p class="client-demand-p"><%=client.demands[i].demandName %>: <%= client.demands[i].demand %></p>
+                        <% } %>
                         <p class="hidden-p"><%=client.id%></p> <!-- ¡no hacer!-->
 
                     <% } %>

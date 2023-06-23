@@ -10,6 +10,21 @@
 </head>
 <body>
     <%- include('./partials/header.ejs')-%>
+
+    <div class="popups-container">
+        <ul class="popups-ul">
+            <% for(let i = 0; i < matches.length; i++){ %>
+
+                <li class="popup-li">
+                    <%- include('./partials/popup.ejs',{match:matches[i],key:i}) -%>
+                </li>
+
+            <% } %>
+        </ul>
+
+
+    </div>
+    
     <div class="inmuebles-container">
         <h1 class="inmuebles-h1">Inmuebles</h1>
         <div class="add-property-container">

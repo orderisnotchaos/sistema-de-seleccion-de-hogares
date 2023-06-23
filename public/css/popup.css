@@ -1,0 +1,18 @@
+.pop-up-container{
+    border: 1px solid black;
+}
+
+.new-match-title{
+    margin: 0;
+    background: rgb(243, 200, 108);
+}
+
+.clean-link{
+    all: unset;
+    z-index: 100;
+}
+
+.clean-link:hover{
+    cursor: pointer;
+}
+

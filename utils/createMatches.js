@@ -1,31 +1,25 @@
 
 const db = require('../database/models');
 
-module.exports = async (req,res,next) =>{
+module.exports = async(properties, clients) => {
 
-    const properties = await db.Property.findAll({include:[{association:"characteristics"}]});
-
-    if(!properties) return res.render("<h1>server error</h1>");
-
-    const clients = await db.Client.findAll({include:[{association:"demands"}]});
-
-    if(!clients) return res.render("<h1>server error</h1>");
-
-    
     let perfectMatches = [];
     let partialMatches = [];
-    
+
     for(let i = 0; i < clients.length; i++){
         let matches = 0;
         for(let j = 0; j < properties.length; j++){
 
-            if(clients[i].propertyType !== properties[j].type){
+            if(clients[i].searchingFor !== properties[j].type){
                 
             }else{
-                for(let k = 0; k< clients[i].demands.length; i++){
+                for(let k = 0; k < clients[i].demands.length; k++){
                     for(let l = 0; l<properties[j].characteristics.length;l++){
-                        if(clients[i].demands[k] === properties[j].characteristics[l]){
-                            matches ++;
+                        
+                        if(clients[i].demands[k].demandName === properties[j].characteristics[l].characteristicName){
+                            if(clients[i].demands[k].demand === properties[j].characteristics[l].characteristic){
+                                matches ++;
+                            }
                         }
                     }
                 }
@@ -34,13 +28,15 @@ module.exports = async (req,res,next) =>{
                     perfectMatches.push({client:clients[i],property:properties[j]});
 
                 }
-
+                console.log(matches);
                 if(matches/clients[i].demands.length >= 0.4){
                     partialMatches.push({client:clients[i],property:properties[j]});
                 }
 
-                matches = 0;
+                
             }
+
+            matches = 0;
         }
     }
 
@@ -72,7 +68,5 @@ module.exports = async (req,res,next) =>{
         }
     }
 
-    req.matches = {perfectMatches,partialMatches}
-        next();
-
-}
+    return [...perfectMatches, ...partialMatches];
+};

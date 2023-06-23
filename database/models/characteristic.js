@@ -8,81 +8,17 @@ module.exports = (sequelize, DataTypes) => {
             primaryKey: true,
             allowNull: false
         },
-
-        propertyType:{
+        characteristicName:{
+            type: DataTypes.STRING,
+            primaryKey:true,
+            allowNull:false
+        },
+        characteristic:{
             type:DataTypes.STRING,
-            primaryKey: true,
+            allowNull:false
         },
 
-        roomsQuantity:{
-            type:DataTypes.INTEGER,
-            allowNull: true
-        },
 
-        bathroomsQuantity:{
-            type:DataTypes.INTEGER,
-            allowNull: true
-        },
-
-        cocherasQuantity:{
-            type:DataTypes.INTEGER,
-            allowNull: true
-        },
-
-        floorsQuantity:{
-            type:DataTypes.INTEGER,
-            allowNull: true
-        },
-
-        sqmc:{
-            type:DataTypes.DOUBLE,
-            allowNull: true
-        },
-
-        sqmt:{
-            type:DataTypes.DOUBLE,
-            allowNull: true
-        },
-
-        antiquity:{
-            type:DataTypes.INTEGER,
-            allowNull: true
-        },
-
-        description:{
-            type:DataTypes.STRING,
-            allowNull: true
-        },
-
-        address:{
-            type:DataTypes.STRING,
-            allowNull: true
-        },
-
-        city:{
-            type:DataTypes.STRING,
-            allowNull: true
-        },
-
-        neighborhood:{
-            type:DataTypes.STRING,
-            allowNull: true
-        },
-
-        province:{
-            type:DataTypes.STRING,
-            allowNull: true
-        },
-
-        currency:{
-            type:DataTypes.STRING,
-            allowNull: true
-        },
-
-        operationType:{
-            type:DataTypes.STRING,
-            allowNull: true
-        },
     }
     let config = {
         tableName: 'characteristics',

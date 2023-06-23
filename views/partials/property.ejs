@@ -10,21 +10,9 @@
             <div class="property-characteristics-container">
                 <h4 class="property-details-h4">características</h4>
                 <% if(property.characteristics !== undefined) {%>
-                    <p class="property-characteristic-p">tipo de inmueble: <%= property.characteristics[0].propertyType %></p>
-                    <p class="property-characteristic-p">cantidad de cuartos: <%= property.characteristics[0].roomsQuantity %></p>
-                    <p class="property-characteristic-p">cantidad de baños: <%= property.characteristics[0].bathroomsQuantity %></p>
-                    <p class="property-characteristic-p">cantidad de cocheras: <%= property.characteristics[0].cocherasQuantity %></p>
-                    <p class="property-characteristic-p">cantidad de pisos: <%= property.characteristics[0].floorsQuantity %></p>
-                    <p class="property-characteristic-p">metros cuadrados cubiertos: <%= property.characteristics[0].sqmc %></p>
-                    <p class="property-characteristic-p">total metros cuadrados: <%= property.characteristics[0].sqmt %></p>
-                    <p class="property-characteristic-p">antigüedad: <%= property.characteristics[0].antiquity %></p>
-                    <p class="property-characteristic-p">descripción: <%= property.characteristics[0].description %></p>
-                    <p class="property-characteristic-p">dirección: <%= property.characteristics[0].address %></p>
-                    <p class="property-characteristic-p">ciudad: <%= property.characteristics[0].city %></p>
-                    <p class="property-characteristic-p">municipio: <%= property.characteristics[0].neighborhood %></p>
-                    <p class="property-characteristic-p">provincia: <%= property.characteristics[0].province %></p>
-                    <p class="property-characteristic-p">tipo de moneda: <%= property.characteristics[0].currency %></p>
-                    <p class="property-characteristic-p">tipo de operación: <%= property.characteristics[0].operationType %></p>
+                    <% for(let i = 0; i<property.characteristics.length; i++){%>
+                        <p class="property-characteristic-p"><%= property.characteristics[i].characteristicName %>: <%= property.characteristics[i].characteristic %></p>
+                    <% } %>
                 <% } %>
             </div>
             <div class="edit-view-button-container">
@@ -44,21 +32,9 @@
                 <div id = "characteristics-container-<%=key%>" class="property-characteristics-container">
                     <h4 class="property-details-h4">características</h4>
                     <% if(property.characteristics !== undefined) {%>
-                        <p class="property-characteristic-p">tipo de inmueble: <%= property.characteristics[0].propertyType %></p>
-                        <p class="property-characteristic-p">cantidad de cuartos: <%= property.characteristics[0].roomsQuantity %></p>
-                        <p class="property-characteristic-p">cantidad de baños: <%= property.characteristics[0].bathroomsQuantity %></p>
-                        <p class="property-characteristic-p">cantidad de cocheras: <%= property.characteristics[0].cocherasQuantity %></p>
-                        <p class="property-characteristic-p">cantidad de pisos: <%= property.characteristics[0].floorsQuantity %></p>
-                        <p class="property-characteristic-p">metros cuadrados cubiertos: <%= property.characteristics[0].sqmc %></p>
-                        <p class="property-characteristic-p">total metros cuadrados: <%= property.characteristics[0].sqmt %></p>
-                        <p class="property-characteristic-p">antigüedad: <%= property.characteristics[0].antiquity %></p>
-                        <p class="property-characteristic-p">descripción: <%= property.characteristics[0].description %></p>
-                        <p class="property-characteristic-p">dirección: <%= property.characteristics[0].address %></p>
-                        <p class="property-characteristic-p">ciudad: <%= property.characteristics[0].city %></p>
-                        <p class="property-characteristic-p">municipio: <%= property.characteristics[0].neighborhood %></p>
-                        <p class="property-characteristic-p">provincia: <%= property.characteristics[0].province %></p>
-                        <p class="property-characteristic-p">tipo de moneda: <%= property.characteristics[0].currency %></p>
-                        <p class="property-characteristic-p">tipo de operación: <%= property.characteristics[0].operationType %></p>
+                        <% for(let i = 0; i<property.characteristics.length; i++){%>
+                            <p class="property-characteristic-p"><%= property.characteristics[i].characteristicName %>: <%= property.characteristics[i].characteristic %></p>
+                        <% } %>
                     <% } %>
                 </div>
                 <div class="edit-view-button-container">

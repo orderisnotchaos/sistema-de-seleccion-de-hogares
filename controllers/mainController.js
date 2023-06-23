@@ -1,5 +1,5 @@
 const db = require('../database/models');
-
+const createMatches = require('../utils/createMatches');
 module.exports=  mainController = {
 
 
@@ -9,241 +9,250 @@ module.exports=  mainController = {
 
     },
 
-        clients: async (req, res) => {
+    clients: async (req, res) => {
 
-            const clients = await db.Client.findAll({include:[{model:db.Demand, as:'demands'}]});
+        const clients = await db.Client.findAll({include:[{model:db.Demand, as:'demands'}]});
 
-            if(!clients) return res.render("<h1>server error</h1>");
+        if(!clients) return res.render("<h1>server error</h1>");
 
-            return res.render('clients', {title: 'Clients', clients:clients});
+        const properties = await db.Property.findAll({include:[{model:db.Characteristic,as:'characteristics'}]});
 
-        },
+        if(!properties) return res.render("<h1>server error</h1>");
 
-        addClient: async (req, res) => {
+        const matches = await createMatches(properties,clients);
 
-            if(!req.body) return res.status(400).render("error: no data sent");
+        return res.render('clients', {title: 'Clients', clients:clients,matches:matches});
 
-            const client = await db.Client.create({name:req.body.name,
-                                                   email:req.body.email,
-                                                   phone:req.body.phone,
-                                                   direction:req.body.direction,
-                                                   city:req.body.city,});
-    
-            const addDemandsResult = await db.Demand.create({clientId:client.id,
-                                                              propertyType:req.body.propertyType,
-                                                              roomsQuantity:Number(req.body.roomsQuantity),
-                                                              bathroomsQuantity:Number(req.body.bathroomsQuantity),
-                                                              cocherasQuantity:Number(req.body.cocherasQuantity),
-                                                              floorsQuantity:Number(req.body.floorsQuantity),
-                                                              sqmc:req.body.sqmc,
-                                                              sqmt:req.body.sqmt,
-                                                              antiquity:req.body.antiquity,
-                                                              state:req.body.state});
+    },
 
-            if(!addDemandsResult) return res.status(500);
+    addClient: async (req, res) => {
 
-            if(!client) return res.render("<h1>server error</h1>");
-    
-            return res.redirect('/clients');
-    
-        },
-        properties: async (req, res) => {
-                
-            const properties = await db.Property.findAll({include:[{model:db.Characteristic,as:'characteristics'}]});
+        if(!req.body) return res.status(400).render("error: no data sent");
 
-            if(!properties) return res.render("<h1>server error</h1>");
+        const client = await db.Client.create({name:req.body.name,
+                                                email:req.body.email,
+                                                phone:req.body.phone,
+                                                direction:req.body.direction,
+                                                city:req.body.city,
+                                                searchingFor:req.body.propertyType});
 
-            return res.render('properties', {title: 'Properties', properties:properties});
+        if(!client) return res.render("<h1>server error</h1>");
 
-        },
+        const bodyKeys = Object.keys(req.body);
 
-        addProperty: async (req,res) =>{
+        for (let i= 0; i< bodyKeys.length; i++){
+            
+            if(bodyKeys[i] !== 'email' && bodyKeys[i] !== 'phone' && bodyKeys[i] !== 'name' && bodyKeys[i] !== 'city' && bodyKeys[i] !== 'direction'){
 
-            if(!req.body) return res.status(400).send("error: no data sent");
+                const demand = await db.Demand.create({clientId:client.id,
+                                                        demandName:bodyKeys[i],
+                                                        demand:req.body[bodyKeys[i]]});
 
-            const propertyPivot = await db.Property.findOne({where:{direction:req.body.direction}});
+                if(!demand) return res.status(500).send("<h1>server error</h1>");
+            }
+        }
 
-            let property;
+        return res.redirect('/clients');
 
-            if(!propertyPivot) property = await db.Property.create({ direction:req.body.direction,
-                                                        valueRent:req.body.valueRent,
-                                                        valueSell:req.body.valueSale,
-                                                        lat:Math.random()*100,
-                                                        lng:Math.random()*100,});
+    },
+    properties: async (req, res) => {
+            
+        const properties = await db.Property.findAll({include:[{model:db.Characteristic,as:'characteristics'}]});
 
-            if(propertyPivot) return res.status(400).send("error: property already exists");
+        if(!properties) return res.render("<h1>server error</h1>");
 
-            if(!property) return res.status(500).send("<h1>server error</h1>");
+        const clients = await db.Client.findAll({include:[{model:db.Demand, as:'demands'}]});
 
-            const addCharacteristicsRes = await db.Characteristic.create({propertyId:property.id,
-                                                                          propertyType:req.body.propertyType,
-                                                                          roomsQuantity:Number(req.body.bedroomsQuantity),
-                                                                          bathroomsQuantity:Number(req.body.bathroomsQuantity),
-                                                                          cocherasQuantity:Number(req.body.cocherasQuantity),
-                                                                          floorsQuantity:Number(req.body.floorsQuantity),
-                                                                          sqmc:req.body.sqmc,
-                                                                          sqmt:req.body.sqmt,
-                                                                          antiquity:req.body.antiquity,
-                                                                          description:req.body.description,
-                                                                          address:req.body.address,
-                                                                          city:req.body.city,
-                                                                          neighborhood:req.body.neighborhood,
-                                                                          province:req.body.province,
-                                                                          currency:req.body.currency,
-                                                                          operationType:req.body.operationType});
+        if(!clients) return res.render("<h1>server error</h1>");
 
-            if(!addCharacteristicsRes) return res.status(500).send("<h1>server error</h1>");
+        let matches = await createMatches(properties,clients);
+
+        return res.render('properties', {title: 'Properties', properties:properties,matches:matches});
+
+    },
+
+    addProperty: async (req,res) =>{
+
+        if(!req.body) return res.status(400).send("error: no data sent");
+
+        const propertyPivot = await db.Property.findOne({where:{direction:req.body.direction}});
+
+        let property;
+
+        if(!propertyPivot) property = await db.Property.create({ direction:req.body.direction,
+                                                    valueRent:req.body.valueRent,
+                                                    valueSell:req.body.valueSale,
+                                                    type: req.body.propertyType,
+                                                    lat:Math.random()*100,
+                                                    lng:Math.random()*100,});
+
+        if(propertyPivot) return res.status(400).send("error: property already exists");
+
+        if(!property) return res.status(500).send("<h1>server error</h1>");
+  
+        const bodyKeys = Object.keys(req.body);
+
+        for (let i= 0; i< bodyKeys.length; i++){
+            if(bodyKeys[i] !== "direction" && bodyKeys[i] !== "valueRent" && bodyKeys[i] !== "valueSale" && bodyKeys[i] !== "type" && bodyKeys[i] !== "lat" && bodyKeys[i] !== "lng"){
+
+                const characteristic = await db.Characteristic.create({propertyId:property.id,
+                                                                        characteristicName:bodyKeys[i],
+                                                                        characteristic:req.body[bodyKeys[i]]});
+
+                if(!characteristic) return res.status(500).send("<h1>server error</h1>");
+
+            }
+        }
+
+        return res.redirect('/properties');
+    },
+
+    matches: async (req,res) =>{
+
+        const perfectMatches = await db.PerfectMatch.findAll({});
+
+        const partialMatches = await db.PartialMatch.findAll({});
+
+        if(!perfectMatches || !partialMatches) return res.render("<h1>server error</h1>");
+
+        const matches = {perfectMatches:[],partialMatches:[]};
+
+        for(let i = 0; i<perfectMatches.length; i++){
+
+            const property = await db.Property.findOne({where:{id:perfectMatches[i].propertyId},
+                                                        include:{model:db.Characteristic, as:"characteristics"}});
+            const client = await db.Client.findOne({where:{id:perfectMatches[i].clientId}});
+            matches.perfectMatches.push({property:property,client:client});
+
+        }
+
+        for(let i = 0; i<partialMatches.length;i++){
+
+            const property = await db.Property.findOne({where:{id:partialMatches[i].propertyId},
+                                                                include:{model:db.Characteristic, as:"characteristics"}});
+
+            const client = await db.Client.findOne({where:{id:partialMatches[i].clientId},
+                                                            include:[{model:db.Demand, as:'demands'}]});
 
             
-            return res.redirect('/properties');
-        },
+            matches.partialMatches.push({property:property,client:client});
 
-        matches: async (req,res) =>{
+        }
+        return res.render('matches', {title: 'Matches', matches:matches});
 
-            const perfectMatches = await db.PerfectMatch.findAll({});
+    },
 
-            const partialMatches = await db.PartialMatch.findAll({});
+    editClient: async (req,res) =>{
 
-            if(!perfectMatches || !partialMatches) return res.render("<h1>server error</h1>");
+        if(!req.body) return res.status(400).send("error: no data sent");
 
-            const matches = {perfectMatches:[],partialMatches:[]};
+        const client = await db.Client.findOne({where:{id:req.params.id}});
 
-            for(let i = 0; i<perfectMatches.length; i++){
+        if(!client) return res.status(400).send("error: client not found");
 
-                const property = await db.Property.findOne({where:{id:perfectMatches[i].propertyId},
-                                                            include:{model:db.Characteristic, as:"characteristics"}});
-                const client = await db.Client.findOne({where:{id:perfectMatches[i].clientId}});
-                matches.perfectMatches.push({property:property,client:client});
+        const demands =[];
 
-            }
+        if(Number(req.body.demandsQuantity) > 0){
 
-            for(let i = 0; i<partialMatches.length;i++){
+            for(let i = 0; i< Number(req.body.demandsQuantity); i++){
 
-                const property = await db.Property.findOne({where:{id:partialMatches[i].propertyId},
-                                                                   include:{model:db.Characteristic, as:"characteristics"}});
+                let demand ;
 
-                const client = await db.Client.findOne({where:{id:partialMatches[i].clientId},
-                                                               include:[{model:db.Demand, as:'demands'}]});
+                try{
 
-                
-                matches.partialMatches.push({property:property,client:client});
+                    demand = await db.Demand.create({clientId:client.id,demand:req.body[`demand${i}`]});
 
-            }
-            console.log(matches);
-            return res.render('matches', {title: 'Matches', matches:matches});
+                }catch(error){
 
-        },
-
-        editClient: async (req,res) =>{
-
-            if(!req.body) return res.status(400).send("error: no data sent");
-
-            const client = await db.Client.findOne({where:{id:req.params.id}});
-
-            if(!client) return res.status(400).send("error: client not found");
-
-            const demands =[];
-
-            if(Number(req.body.demandsQuantity) > 0){
-
-                for(let i = 0; i< Number(req.body.demandsQuantity); i++){
-
-                    let demand ;
-
-                    try{
-
-                        demand = await db.Demand.create({clientId:client.id,demand:req.body[`demand${i}`]});
-
-                    }catch(error){
-
-                        console.log(error);
-
-                    }
-
-                    demands.push(demand);
+                    console.log(error);
 
                 }
 
+                demands.push(demand);
+
             }
 
-            const demandsResult = await Promise.all(demands);
+        }
 
-            if(demandsResult.length !== Number(req.body.demandsQuantity)) return res.render("<h1>server error</h1>");
+        const demandsResult = await Promise.all(demands);
 
-            let updatedClient = await client.update({email:req.body.email,
-                           phone:req.body.phone,
-                           direction:req.body.direction,
-                           city:req.body.city,});
+        if(demandsResult.length !== Number(req.body.demandsQuantity)) return res.render("<h1>server error</h1>");
 
-            if(!updatedClient) return res.render("<h1>server error</h1>");
+        let updatedClient = await client.update({email:req.body.email,
+                        phone:req.body.phone,
+                        direction:req.body.direction,
+                        city:req.body.city,});
 
-            return res.redirect('/clients');
-        },
+        if(!updatedClient) return res.render("<h1>server error</h1>");
 
-        deleteDemand : async (req,res) =>{
+        return res.redirect('/clients');
+    },
+
+    deleteDemand : async (req,res) =>{
 
 
-            if(!req.params.id) return res.status(400).json('need client id');
+        if(!req.params.id) return res.status(400).json('need client id');
 
-            if(!req.body.characteristic) return res.status(400).json('need demand');
+        if(!req.body.characteristic) return res.status(400).json('need demand');
 
-            const demand = await db.Demand.findOne({where:{clientId:req.params.id,demand:req.body.demand}});
+        const demand = await db.Demand.findOne({where:{clientId:req.params.id,demand:req.body.demand}});
+        
+        demand.destroy();
+
+        return res.status(201).json({ok:true});
+    },
+
+    deleteCharacteristic : async (req,res) =>{
+
+        if(!req.params.id) return res.status(400).json('need property id');
+
+        if(!req.body.characteristic) return res.status(400).json('need characteristic');
+
+        const characteristic = await db.Characteristic.findOne({where:{propertyId:req.params.id,characteristic:req.body.characteristic}});
+
+        if(!characteristic) return res.status(400).json('characteristic not found');
+
+        characteristic.destroy();
+
+        return res.status(201).json({ok:true});
+    },
+
+    deleteProperty: async (req,res) =>{
             
-            demand.destroy();
+        if(!req.params.id) return res.status(400).json('need property id');
 
-            return res.status(201).json({ok:true});
-        },
+        const property = await db.Property.findOne({where:{id:req.params.id}});
 
-        deleteCharacteristic : async (req,res) =>{
+        if(!property) return res.status(400).json('property not found');
 
-            if(!req.params.id) return res.status(400).json('need property id');
+        await db.Characteristic.destroy({where:{propertyId:req.params.id}});
 
-            if(!req.body.characteristic) return res.status(400).json('need characteristic');
+        await db.PartialMatch.destroy({where:{propertyId:req.params.id}});
 
-            const characteristic = await db.Characteristic.findOne({where:{propertyId:req.params.id,characteristic:req.body.characteristic}});
+        await db.PerfectMatch.destroy({where:{propertyId:req.params.id}});
+        
+        property.destroy();
 
-            if(!characteristic) return res.status(400).json('characteristic not found');
+        return res.status(201).json({ok:true});
+    },
 
-            characteristic.destroy();
-
-            return res.status(201).json({ok:true});
-        },
-
-        deleteProperty: async (req,res) =>{
+    deleteClient: async (req,res) =>{
                 
-            if(!req.params.id) return res.status(400).json('need property id');
+        if(!req.params.id) return res.status(400).json('need client id');
 
-            const property = await db.Property.findOne({where:{id:req.params.id}});
+        const client = await db.Client.findOne({where:{id:req.params.id}});
 
-            if(!property) return res.status(400).json('property not found');
+        if(!client) return res.status(400).json('client not found');
 
-            await db.Characteristic.destroy({where:{propertyId:req.params.id}});
+        await db.Demand.destroy({where:{clientId:req.params.id}});
 
-            await db.PartialMatch.destroy({where:{propertyId:req.params.id}});
+        await db.PartialMatch.destroy({where:{clientId:req.params.id}});
 
-            await db.PerfectMatch.destroy({where:{propertyId:req.params.id}});
-            
-            property.destroy();
-    
-            return res.status(201).json({ok:true});
-        },
-        deleteClient: async (req,res) =>{
-                    
-                    if(!req.params.id) return res.status(400).json('need client id');
-        
-                    const client = await db.Client.findOne({where:{id:req.params.id}});
-        
-                    if(!client) return res.status(400).json('client not found');
-        
-                    await db.Demand.destroy({where:{clientId:req.params.id}});
+        await db.PerfectMatch.destroy({where:{clientId:req.params.id}});
 
-                    await db.PartialMatch.destroy({where:{clientId:req.params.id}});
+        client.destroy();
 
-                    await db.PerfectMatch.destroy({where:{clientId:req.params.id}});
-
-                    client.destroy();
-        
-                    return res.status(201).json({ok:true});
-            }
+        return res.status(201).json({ok:true});
+    }
 
 };
