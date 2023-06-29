@@ -8,7 +8,6 @@ window.addEventListener('load', () => {
     characteristics += "<label class='characteristics-label'>Metros cuadrados totales:</label><input class = 'characteristics-input' name='sqmt' type='number' required></input>";
     characteristics += "<label class= 'characteristics-label'> Ubicación:</label><input class = 'characteristics-input' name='location' type='text' required></input>";
     characteristics += "<label class='characteristics-label'>Antiguedad:</label><input class = 'characteristics-input' name='antiquity' type='number' required></input>";
-    characteristics += "<label class='characteristics-label'>Moneda:</label><input class = 'characteristics-input' name='currency' type='text' required></input>";
     let characteristicsInputs = document.getElementById('characteristics-inputs');
 
     characteristicsInputs.style.border = "1px solid black";
@@ -19,7 +18,7 @@ window.addEventListener('load', () => {
     document.getElementById('property-type').addEventListener('change', (event) => {
 
         let characteristicsInputs = document.getElementById('characteristics-inputs');
-        console.log('!');
+
         switch(event.target.value){
             case 'casa':
                 
@@ -32,7 +31,7 @@ window.addEventListener('load', () => {
                 characteristics += "<label class='characteristics-label'>Metros cuadrados totales:</label><input class = 'characteristics-input' name='sqmt' type='number' required></input>";
                 characteristics += "<label class= 'characteristics-label'> Ubicación:</label><input class = 'characteristics-input' name='location' type='text' required></input>";
                 characteristics += "<label class='characteristics-label'>Antiguedad:</label><input class = 'characteristics-input' name='antiquity' type='number' required></input>";
-                characteristics += "<label class='characteristics-label'>Moneda:</label><input class = 'characteristics-input' name='currency' type='text' required></input>";
+
                 characteristicsInputs.style.border = "1px solid black";
                 characteristicsInputs.style.display = "flex";
                 characteristicsInputs.style.flexWrap = "wrap";	
@@ -47,7 +46,6 @@ window.addEventListener('load', () => {
                 characteristics += "<label class='characteristics-label'>Metros cuadrados:</label><input class = 'characteristics-input' name='sqmt'type='number' required></input>";
                 characteristics += "<label class='characteristics-label'> Ubicación:</label><input class = 'characteristics-input' name='location' type='text' required></input>";
                 characteristics += "<label class='characteristics-label'>Antiguedad:</label><input class = 'characteristics-input' name='antiquity' type='number' required></input>";
-                characteristics += "<label class='characteristics-label'>Moneda:</label><input class = 'characteristics-input' name='currency' type='text' required></input>";
                 characteristics += "<label class='characteristics-label'>Terraza:</label><input class = 'characteristics-input' name = 'terrace' type='boolean' required></input>";
 
                 characteristicsInputs.style.border = "1px solid black";
@@ -60,7 +58,6 @@ window.addEventListener('load', () => {
 
                 characteristics = "<label class='characteristics-label'>metros cuadrados:</label><input class = 'characteristics-input' name = 'bedroomsQuantity' type='number' required></input>";
                 characteristics +=  "<label class='characteristics-label'> Ubicación:</label><input class = 'characteristics-input' name='location' type='text' required></input>";
-                characteristics += "<label class='characteristics-label'> Moneda:</label><input class = 'characteristics-input' name='location' type='text' required></input>";
 
                 characteristicsInputs.style.border = "1px solid black";
                 characteristicsInputs.style.display = "flex";

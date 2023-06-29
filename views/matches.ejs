@@ -31,11 +31,11 @@
                 </div>
                 <div class="match-characteristics-container">
                     <h4 class="matches-h4">caracteristicas</h4>
-                    <% if(matches.perfectMatches[i].property.characteristics !== undefined ) {%>
+                    <% if(matches.perfectMatches[i] !== undefined ) {%>
 
                         <h4 class="matches-h4">caracteristicas del inmueble</h4>
-                        <% for(let j = 0; j< matches.partialMatches[i].property.characteristics.length; j++){ %>
-                        <p class="property-characteristic-p"> <%= matches.partialMatches[i].property.characteristics[j].characteristicName%>: <%= matches.partialMatches[i].property.characteristics[j].characteristic %></p>
+                        <% for(let j = 0; j< matches.perfectMatches[i].property.characteristics.length; j++){ %>
+                        <p class="property-characteristic-p"> <%= matches.perfectMatches[i].property.characteristics[j].characteristicName%>: <%= matches.perfectMatches[i].property.characteristics[j].characteristic %></p>
                         <% } %>
                     <% } %>
                 </div>
@@ -56,7 +56,7 @@
                 </div>
                 <div class="match-characteristics-container">
                     <h4 class="matches-h4">caracteristicas</h4>
-                    <% if(matches.partialMatches[i].property.characteristics !== undefined && matches.partialMatches[i].client.demands !== undefined) {%>
+                    <% if(matches.partialMatches[i]!== undefined) {%>
 
                         <h4 class="matches-h4">caracteristicas del inmueble</h4>
                         <% for(let j = 0; j<matches.partialMatches[i].property.characteristics.length; j++){ %>

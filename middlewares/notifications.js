@@ -33,9 +33,7 @@ module.exports = async (req,res,next) =>{
 
                     perfectMatches.push({client:clients[i],property:properties[j]});
 
-                }
-
-                if(matches/clients[i].demands.length >= 0.4){
+                }else if(matches/clients[i].demands.length >= 0.4){
                     partialMatches.push({client:clients[i],property:properties[j]});
                 }
 

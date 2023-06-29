@@ -23,13 +23,12 @@ module.exports = async(properties, clients) => {
                         }
                     }
                 }
+                console.log(matches,clients[i].demands.length,properties[j].characteristics.length);
                 if(matches === clients[i].demands.length && matches === properties[j].characteristics.length){
 
-                    perfectMatches.push({client:clients[i],property:properties[j]});
+                   perfectMatches.push({client:clients[i],property:properties[j]});
 
-                }
-                console.log(matches);
-                if(matches/clients[i].demands.length >= 0.4){
+                }else if(matches/clients[i].demands.length >= 0.4){
                     partialMatches.push({client:clients[i],property:properties[j]});
                 }
 
